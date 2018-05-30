@@ -1,4 +1,4 @@
-<?php
+->set('dep<?php
 namespace Deployer;
 
 require 'recipe/common.php';
@@ -22,9 +22,9 @@ set('writable_dirs', []);
 
 // Hosts
 
-host('192.168.1.11/home/www/inovasi/coba','192.168.1.11/home/www/inovasi/coba1')
+host('192.168.1.11/home/www/inovasi/server1','192.168.1.11/home/www/inovasi/server2')
     ->user('debian')
-    ->set('deploy_path', '~/{{hostname}}/file');    
+    ->set('deploy_path', '');    
 
 // Tasks
 

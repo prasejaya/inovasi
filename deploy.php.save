@@ -4,7 +4,7 @@ namespace Deployer;
 require 'recipe/common.php';
 
 // Project name
-set('application', 'inovasi');
+set('application', 'my_project');
 
 // Project repository
 set('repository', 'https://github.com/prasejaya/inovasi.git');
@@ -22,9 +22,15 @@ set('writable_dirs', []);
 
 // Hosts
 
-host('192.168.1.11/home/www/inovasi/coba','192.168.1.11/home/www/inovasi/coba1')
+host('192.168.1.11')
     ->user('debian')
-    ->set('deploy_path', '~/{{hostname}}/file');    
+    ->set('deploy_path', '/home/www/inovasi/server1/');
+    ->stage('production');
+
+host('192.168.1.11')
+    ->user('debian')
+        
+    
 
 // Tasks
 
@@ -33,9 +39,8 @@ task('deploy', [
     'deploy:info',
     'deploy:prepare',
     'deploy:lock',
-    'deploy:release',
+    'deplo
     'deploy:update_code',
-    'deploy:shared',
     'deploy:writable',
     'deploy:vendors',
     'deploy:clear_paths',
