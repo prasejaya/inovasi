@@ -1,3 +1,3 @@
 <?php
-if(
+echo 'halaman ke 2';
 ?>
