@@ -1,0 +1,115 @@
+[localhost] > git rev-parse --abbrev-ref HEAD
+[localhost] < master
+[192.168.1.11] > echo $0
+[192.168.1.11] < bash
+[192.168.1.11] > if [ ! -d /home/www/inovasi/server1 ]; then mkdir -p /home/www/inovasi/server1; fi
+[192.168.1.11] > if [ ! -L /home/www/inovasi/server1/current ] && [ -d /home/www/inovasi/server1/current ]; then echo 'true'; fi
+[192.168.1.11] > cd /home/www/inovasi/server1 && if [ ! -d .dep ]; then mkdir .dep; fi
+[192.168.1.11] > cd /home/www/inovasi/server1 && if [ ! -d releases ]; then mkdir releases; fi
+[192.168.1.11] > cd /home/www/inovasi/server1 && if [ ! -d shared ]; then mkdir shared; fi
+[192.168.1.11] > if [ -f /home/www/inovasi/server1/.dep/deploy.lock ]; then echo 'true'; fi
+[192.168.1.11] > touch /home/www/inovasi/server1/.dep/deploy.lock
+[192.168.1.11] > cd /home/www/inovasi/server1 && (if [ -h release ]; then echo 'true'; fi)
+[192.168.1.11] < true
+[192.168.1.11] > cd /home/www/inovasi/server1 && (rm -rf "$(readlink release)")
+[192.168.1.11] > cd /home/www/inovasi/server1 && (rm release)
+[192.168.1.11] > cd /home/www/inovasi/server1 && (if [ -d releases ] && [ "$(ls -A releases)" ]; then echo 'true'; fi)
+[192.168.1.11] > cd /home/www/inovasi/server1 && (if [ -d /home/www/inovasi/server1/releases/1 ]; then echo 'true'; fi)
+[192.168.1.11] > cd /home/www/inovasi/server1 && (date +"%Y%m%d%H%M%S")
+[192.168.1.11] < 20180530145247
+[192.168.1.11] > cd /home/www/inovasi/server1 && (echo '20180530145247,1' >> .dep/releases)
+[192.168.1.11] > cd /home/www/inovasi/server1 && (mkdir /home/www/inovasi/server1/releases/1)
+[192.168.1.11] > cd /home/www/inovasi/server1 && (if [[ $(man ln 2>&1 || ln -h 2>&1 || ln --help 2>&1) =~ '--relative' ]]; then echo 'true'; fi)
+[192.168.1.11] < true
+[192.168.1.11] > cd /home/www/inovasi/server1 && (ln -nfs --relative /home/www/inovasi/server1/releases/1 /home/www/inovasi/server1/release)
+[192.168.1.11] > if hash command 2>/dev/null; then echo 'true'; fi
+[192.168.1.11] < true
+[192.168.1.11] > command -v 'git'
+[192.168.1.11] < /usr/bin/git
+[192.168.1.11] > /usr/bin/git version
+[192.168.1.11] < git version 2.1.4
+[192.168.1.11] > cd /home/www/inovasi/server1 && (if [ -h /home/www/inovasi/server1/release ]; then echo 'true'; fi)
+[192.168.1.11] < true
+[192.168.1.11] > cd /home/www/inovasi/server1 && (readlink /home/www/inovasi/server1/release)
+[192.168.1.11] < releases/1
+[192.168.1.11] > cd /home/www/inovasi/server1 && (/usr/bin/git clone -b master --depth 1 --recursive -q https://github.com/prasejaya/inovasi.git /home/www/inovasi/server1/releases/1 2>&1)
+[192.168.1.11] > if hash unzip 2>/dev/null; then echo 'true'; fi
+[192.168.1.11] < true
+[192.168.1.11] > if hash composer 2>/dev/null; then echo 'true'; fi
+[192.168.1.11] < true
+[192.168.1.11] > if hash command 2>/dev/null; then echo 'true'; fi
+[192.168.1.11] < true
+[192.168.1.11] > command -v 'composer'
+[192.168.1.11] < /usr/local/bin/composer
+[192.168.1.11] > if hash command 2>/dev/null; then echo 'true'; fi
+[192.168.1.11] < true
+[192.168.1.11] > command -v 'php'
+[192.168.1.11] < /usr/bin/php
+[192.168.1.11] > cd /home/www/inovasi/server1/releases/1 && /usr/bin/php /usr/local/bin/composer install --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader
+[192.168.1.11] < [error]                                                                           
+[192.168.1.11] < [error]   [Seld\JsonLint\ParsingException]                                        
+[192.168.1.11] < [error]   "./composer.json" does not contain valid JSON                           
+[192.168.1.11] < [error]   Parse error on line 1:                                                  
+[192.168.1.11] < [error]                                                                           
+[192.168.1.11] < [error]   ^                                                                       
+[192.168.1.11] < [error]   Expected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['  
+[192.168.1.11] < [error]                                                                           
+[192.168.1.11] < [error] Exception trace:
+[192.168.1.11] < [error]  () at phar:///usr/local/bin/composer/src/Composer/Json/JsonFile.php:300
+[192.168.1.11] < [error]  Composer\Json\JsonFile::validateSyntax() at phar:///usr/local/bin/composer/src/Composer/Json/JsonFile.php:156
+[192.168.1.11] < [error]  Composer\Json\JsonFile->validateSchema() at phar:///usr/local/bin/composer/src/Composer/Factory.php:290
+[192.168.1.11] < [error]  Composer\Factory->createComposer() at phar:///usr/local/bin/composer/src/Composer/Factory.php:576
+[192.168.1.11] < [error]  Composer\Factory::create() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:338
+[192.168.1.11] < [error]  Composer\Console\Application->getComposer() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:451
+[192.168.1.11] < [error]  Composer\Console\Application->getPluginCommands() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:149
+[192.168.1.11] < [error]  Composer\Console\Application->doRun() at phar:///usr/local/bin/composer/vendor/symfony/console/Application.php:117
+[192.168.1.11] < [error]  Symfony\Component\Console\Application->run() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:100
+[192.168.1.11] < [error]  Composer\Console\Application->run() at phar:///usr/local/bin/composer/bin/composer:59
+[192.168.1.11] < [error]  require() at /usr/local/bin/composer:24
+[Deployer\Exception\RuntimeException] The command "cd /home/www/inovasi/server1/releases/1 && /usr/bin/php /usr/local/bin/composer install --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader" failed.
+
+Exit Code: 1 (General error)
+
+Host Name: 192.168.1.11
+
+================
+
+                                                                          
+  [Seld\JsonLint\ParsingException]                                        
+  "./composer.json" does not contain valid JSON                           
+  Parse error on line 1:                                                  
+                                                                          
+  ^                                                                       
+  Expected one of: 'STRING', 'NUMBER', 'NULL', 'TRUE', 'FALSE', '{', '['  
+                                                                          
+
+Exception trace:
+ () at phar:///usr/local/bin/composer/src/Composer/Json/JsonFile.php:300
+ Composer\Json\JsonFile::validateSyntax() at phar:///usr/local/bin/composer/src/Composer/Json/JsonFile.php:156
+ Composer\Json\JsonFile->validateSchema() at phar:///usr/local/bin/composer/src/Composer/Factory.php:290
+ Composer\Factory->createComposer() at phar:///usr/local/bin/composer/src/Composer/Factory.php:576
+ Composer\Factory::create() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:338
+ Composer\Console\Application->getComposer() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:451
+ Composer\Console\Application->getPluginCommands() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:149
+ Composer\Console\Application->doRun() at phar:///usr/local/bin/composer/vendor/symfony/console/Application.php:117
+ Symfony\Component\Console\Application->run() at phar:///usr/local/bin/composer/src/Composer/Console/Application.php:100
+ Composer\Console\Application->run() at phar:///usr/local/bin/composer/bin/composer:59
+ require() at /usr/local/bin/composer:24
+
+
+#0 phar:///usr/local/bin/dep/src/functions.php(304): Deployer\Ssh\Client->run(Object(Deployer\Host\Host), 'cd /home/www/in...', Array)
+#1 phar:///usr/local/bin/dep/recipe/deploy/vendors.php(15): Deployer\run('cd /home/www/in...')
+#2 [internal function]: Deployer\Deployer::Deployer\{closure}()
+#3 phar:///usr/local/bin/dep/src/Task/Task.php(105): call_user_func(Object(Closure))
+#4 phar:///usr/local/bin/dep/src/Executor/SeriesExecutor.php(63): Deployer\Task\Task->run(Object(Deployer\Task\Context))
+#5 phar:///usr/local/bin/dep/src/Console/TaskCommand.php(142): Deployer\Executor\SeriesExecutor->run(Array, Array)
+#6 phar:///usr/local/bin/dep/vendor/symfony/console/Command/Command.php(252): Deployer\Console\TaskCommand->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#7 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(946): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#8 phar:///usr/local/bin/dep/src/Console/Application.php(133): Symfony\Component\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#9 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(248): Deployer\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#10 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#11 phar:///usr/local/bin/dep/src/Deployer.php(331): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 phar:///usr/local/bin/dep/bin/dep(119): Deployer\Deployer::run('6.2.0', '/var/www/html/i...')
+#13 /usr/local/bin/dep(4): require('phar:///usr/loc...')
+#14 {main}
+[192.168.1.11] > rm -f /home/www/inovasi/server1/.dep/deploy.lock

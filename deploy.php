@@ -13,8 +13,8 @@ set('repository', 'https://github.com/prasejaya/inovasi.git');
 set('git_tty', true); 
 
 // Shared files/dirs between deploys 
-//set('shared_files', []);
-//set('shared_dirs', []);
+set('shared_files', []);
+set('shared_dirs', []);
 
 // Writable dirs by web server 
 set('writable_dirs', []);
@@ -24,12 +24,7 @@ set('writable_dirs', []);
 
 host('192.168.1.11')
     ->user('debian')
-    ->set('deploy_path', '/home/www/inovasi/server1/');
-
-host('192.168.1.11')
-   ->user('debian')
-   ->set('deploy_path','/home/www/inovasi/server2/');   
-    
+    ->set('deploy_path', '/home/www/inovasi/server1');    
 
 // Tasks
 
