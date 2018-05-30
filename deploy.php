@@ -4,7 +4,7 @@ namespace Deployer;
 require 'recipe/common.php';
 
 // Project name
-set('application', 'my_project');
+set('application', 'inovasi');
 
 // Project repository
 set('repository', 'https://github.com/prasejaya/inovasi.git');
@@ -13,8 +13,8 @@ set('repository', 'https://github.com/prasejaya/inovasi.git');
 set('git_tty', true); 
 
 // Shared files/dirs between deploys 
-set('shared_files', []);
-set('shared_dirs', []);
+//set('shared_files', []);
+//set('shared_dirs', []);
 
 // Writable dirs by web server 
 set('writable_dirs', []);
@@ -23,8 +23,12 @@ set('writable_dirs', []);
 // Hosts
 
 host('192.168.1.11')
-    ->name('debian');
-    ->set('deploy_path', '/home/www/inovasi/server1/');    
+    ->user('debian')
+    ->set('deploy_path', '/home/www/inovasi/server1/');
+
+host('192.168.1.11')
+   ->user('debian')
+   ->set('deploy_path','/home/www/inovasi/server2/');   
     
 
 // Tasks
