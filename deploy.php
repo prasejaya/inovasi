@@ -22,9 +22,9 @@ set('writable_dirs', []);
 
 // Hosts
 
-host('192.168.1.11/home/www/inovasi/coba','192.168.1.11/home/www/inovasi/coba1')
+host('192.168.1.11')
     ->user('debian')
-    ->set('deploy_path', '~/{{hostname}}/file');    
+    ->set('deploy_path', '/home/www/inovasi/coba/file');    
 
 // Tasks
 
